@@ -1,0 +1,149 @@
+[System]
+Name='suppression'
+Type='mamdani'
+Version=2.0
+NumInputs=9
+NumOutputs=1
+NumRules=55
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='sum'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='LU'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input2]
+Name='U'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input3]
+Name='RU'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input4]
+Name='L'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input5]
+Name='M'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input6]
+Name='R'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input7]
+Name='LD'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input8]
+Name='D'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Input9]
+Name='RD'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Output1]
+Name='mid'
+Range=[0 255]
+NumMFs=3
+MF1='mf_low':'gaussmf',[35 0]
+MF2='mf_mid':'gaussmf',[15 100]
+MF3='mf_high':'gaussmf',[35 255]
+
+[Rules]
+1 1 1 1 0 1 1 1 1, 1 (1) : 1
+2 2 2 2 0 2 2 2 2, 2 (1) : 1
+3 3 3 3 0 3 3 3 3, 3 (1) : 1
+1 1 1 1 0 1 0 0 0, 1 (1) : 1
+2 2 2 2 0 2 0 0 0, 2 (1) : 1
+3 3 3 3 0 3 0 0 0, 3 (1) : 1
+1 1 1 2 0 2 0 0 0, 2 (1) : 1
+3 3 3 2 0 2 0 0 0, 2 (1) : 1
+0 0 0 1 0 1 1 1 1, 1 (1) : 1
+0 0 0 2 0 2 2 2 2, 2 (1) : 1
+0 0 0 3 0 3 3 3 3, 3 (1) : 1
+0 0 0 1 0 1 2 2 2, 1 (1) : 1
+0 0 0 2 0 2 3 3 3, 2 (1) : 1
+1 0 0 1 0 0 1 1 1, 1 (1) : 1
+2 0 0 2 0 0 2 2 2, 2 (1) : 1
+3 0 0 3 0 0 3 3 3, 3 (1) : 1
+1 0 0 2 0 0 2 2 1, 1 (1) : 1
+2 0 0 3 0 0 3 3 2, 2 (1) : 1
+3 0 0 2 0 0 2 2 3, 3 (1) : 1
+3 0 0 2 0 0 1 2 3, 3 (1) : 1
+1 1 1 0 0 1 0 0 1, 1 (1) : 1
+2 2 2 0 0 2 0 0 2, 2 (1) : 1
+3 3 3 0 0 3 0 0 3, 3 (1) : 1
+1 2 2 0 0 2 0 0 1, 1 (1) : 1
+2 3 3 0 0 3 0 0 2, 2 (1) : 1
+3 2 2 0 0 2 0 0 3, 3 (1) : 1
+3 2 1 0 0 2 0 0 3, 3 (1) : 1
+1 1 1 1 0 0 1 0 0, 1 (1) : 1
+2 2 2 2 0 0 2 0 0, 2 (1) : 1
+3 3 3 3 0 0 3 0 0, 3 (1) : 1
+2 2 1 2 0 0 1 0 0, 1 (1) : 1
+3 3 2 3 0 0 2 0 0, 2 (1) : 1
+2 2 3 2 0 0 3 0 0, 3 (1) : 1
+1 2 3 2 0 0 3 0 0, 3 (1) : 1
+0 0 1 0 0 1 1 1 1, 1 (1) : 1
+0 0 2 0 0 2 2 2 2, 2 (1) : 1
+0 0 3 0 0 3 3 3 3, 3 (1) : 1
+0 0 1 0 0 2 1 2 2, 1 (1) : 1
+0 0 2 0 0 3 2 3 3, 2 (1) : 1
+0 0 3 0 0 2 3 2 2, 3 (1) : 1
+0 0 3 0 0 2 3 2 1, 3 (1) : 1
+1 1 0 1 0 0 1 1 0, 1 (1) : 1
+2 2 0 2 0 0 2 2 0, 2 (1) : 1
+3 3 0 3 0 0 3 3 0, 3 (1) : 1
+1 2 0 1 0 0 1 2 0, 2 (1) : 1
+2 3 0 2 0 0 2 3 0, 3 (1) : 1
+2 1 0 2 0 0 2 1 0, 1 (1) : 1
+3 2 0 3 0 0 3 2 0, 2 (1) : 1
+0 1 1 0 0 1 0 1 1, 1 (1) : 1
+0 2 2 0 0 2 0 2 2, 2 (1) : 1
+0 3 3 0 0 3 0 3 3, 3 (1) : 1
+0 1 2 0 0 2 0 1 2, 1 (1) : 1
+0 2 3 0 0 3 0 2 3, 2 (1) : 1
+0 2 1 0 0 1 0 2 1, 2 (1) : 1
+0 3 2 0 0 2 0 3 2, 3 (1) : 1

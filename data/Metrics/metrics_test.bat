@@ -1,0 +1,1 @@
+python metrics.py --noisy-dir="%cd%\Input" --filtered-dir="%cd%\Output" --img-ext="tif"
