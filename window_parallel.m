@@ -43,14 +43,14 @@ imhist(img) % Display Image Histogram
 hold on
 imhist(img_out)
 
-figure
-ax1 = subplot(1,1,1); imshow(img);
-figure
-ax2 = subplot(1,1,1); imshow(img_out);
+% figure
+% ax1 = subplot(1,1,1); imshow(img);
+% figure
+% ax2 = subplot(1,1,1); imshow(img_out);
 
-linkaxes([ax1 ax2],'xy');
+% linkaxes([ax1 ax2],'xy');
 
-out_fname = sprintf('data/full_size/output/HDR/FIS2/out_%s', fname);
+out_fname = sprintf('data/Output/HDR/%s', fname);
 % imwrite(img_out, out_fname); % Save output Image
 
 info = imfinfo([pthname fname]);
