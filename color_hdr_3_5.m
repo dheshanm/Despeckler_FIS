@@ -1,4 +1,4 @@
-% Takes an input image (non-HDR) and bins the pixels into 3 and 5 bins, based on its intensity values
+% Takes an input image (HDR) and bins the pixels into 3 and 5 bins, based on its intensity values
 
 [fname, pthname]=uigetfile('*.jpg;*.png;*.tif;*.bmp','Select the Asset Image'); %select image 
 
@@ -15,22 +15,22 @@ j_loop_var = n;
 for i = 1:i_loop_var
     for j = 1:j_loop_var
         pxl_val = getPixel(inp_img, i, j);
-        if pxl_val <= 50
+        if pxl_val <= 1200
             cat = 1;
             color_img_5(i, j, 1) = 0;
             color_img_5(i, j, 2) = 0;
             color_img_5(i, j, 3) = 0;
-        elseif pxl_val <= 100
+        elseif pxl_val <= 2000
             cat = 2;
             color_img_5(i, j, 1) = 255;
             color_img_5(i, j, 2) = 0;
             color_img_5(i, j, 3) = 0;
-        elseif pxl_val <= 150
+        elseif pxl_val <= 3000
             cat = 3;
             color_img_5(i, j, 1) = 0;
             color_img_5(i, j, 2) = 255;
             color_img_5(i, j, 3) = 0;
-        elseif pxl_val <= 200
+        elseif pxl_val <= 5000
             cat = 4;
             color_img_5(i, j, 1) = 0;
             color_img_5(i, j, 2) = 0;
@@ -42,13 +42,12 @@ for i = 1:i_loop_var
             color_img_5(i, j, 3) = 255;
         end
         
-        
-        if pxl_val <= 60
+        if pxl_val <= 1200
             cat = 1;
             color_img_3(i, j, 1) = 255;
             color_img_3(i, j, 2) = 0;
             color_img_3(i, j, 3) = 0;
-        elseif pxl_val <= 150
+        elseif pxl_val <= 3000
             cat = 2;
             color_img_3(i, j, 1) = 0;
             color_img_3(i, j, 2) = 255;
@@ -63,25 +62,18 @@ for i = 1:i_loop_var
 end
 toc
 
-% figure
-% ax1 = subplot(1,3,1); imshow(color_img_3);
-% ax2 = subplot(1,3,2); imshow(color_img_5);
-% ax3 = subplot(1,3,3); imshow(inp_img);
-% linkaxes([ax1 ax2 ax3],'xy');
-
-figure
+figure('Name','RGB', 'NumberTitle','off')
 ax1 = subplot(1,1,1); imshow(color_img_3);
-figure
+figure('Name','BRGBW', 'NumberTitle','off')
 ax2 = subplot(1,1,1); imshow(color_img_5);
 
 linkaxes([ax1 ax2],'xy');
 
 figure
-imhist(inp_img)
-out_fname_5 = sprintf('data/output/color_5/color_%s', fname);
-out_fname_3 = sprintf('data/output/color/color_%s', fname);
-imwrite(color_img_5, out_fname_5); % Save output Image
-imwrite(color_img_3, out_fname_3); % Save output Image
+histogram(inp_img)
+figure
+imhist(color_img_5)
+
 
 function pixel = getPixel(mat, i, j)
     pixel = mat(i, j);

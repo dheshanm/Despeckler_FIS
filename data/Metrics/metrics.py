@@ -79,9 +79,19 @@ def PSNR(img_n, img_f):
     print(f'        [*] PSNR @ {PSNR}')
     return PSNR
     
+def MEAN_in(img_n):
+    MEAN = np.mean(img_n)
+    print(f'        [*] MEAN Input @ {MEAN}')
+    return MEAN
+    
+def MEAN_out(img_n):
+    MEAN = np.mean(img_n)
+    print(f'        [*] MEAN Output @ {MEAN}')
+    return MEAN
+    
 
 if __name__ == '__main__':
-    df = pd.DataFrame(columns = ['Name', 'PSNR', 'SSI', 'SMPI', 'SSIM']) 
+    df = pd.DataFrame(columns = ['Name', 'PSNR', 'SSI', 'SMPI', 'SSIM', 'MEAN_in', 'MEAN_out']) 
     noisy_files = glob((args.noisy_dir+'/*.'+args.ext).format('float32'))
     denoi_files = glob((args.filtered_dir+'/*.'+args.ext).format('float32'))
     print(f' [] Found {len(noisy_files)} files')
@@ -97,9 +107,9 @@ if __name__ == '__main__':
     
     for idx in range(len(noisy_files)):
         print(f'    [] Loading Noisy Image @ {noisy_files[idx]}')
-        img_n = np.asarray(Image.open(noisy_files[idx]).convert('L'))  # Noisy
+        img_n = np.asarray(Image.open(noisy_files[idx]))  # Noisy
         print(f'    [] Loading Filtered Image @ {denoi_files[idx]}')
-        img_f = np.asarray(Image.open(denoi_files[idx]).convert('L'))  # Filtered
+        img_f = np.asarray(Image.open(denoi_files[idx]))  # Filtered
         
     ###########################################################################
         print(f'      [*] Starting Metrics Computation')
@@ -108,9 +118,11 @@ if __name__ == '__main__':
         smpi_v = SMPI(img_n, img_f)
 #         enl_v = ENL_handler(denoi_files[idx])
         ssim_v = SSIM(img_n, img_f)
+        mean_in = MEAN_in(img_n)
+        mean_out = MEAN_out(img_f)
 
 #         df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'ENL': enl_v}, ignore_index = True) 
-        df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'SSIM': ssim_v}, ignore_index = True) 
+        df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'SSIM': ssim_v, 'MEAN_in': mean_in, 'MEAN_out': mean_out}, ignore_index = True) 
     
     ###########################################################################
     

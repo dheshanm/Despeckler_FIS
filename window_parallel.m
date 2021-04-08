@@ -1,11 +1,11 @@
 % Precess an Image through a FIS
-[fname, pthname]=uigetfile('*.jpg;*.png;*.tif;*.bmp','Select the Asset Image'); %select image 
+[fname, pthname] = uigetfile('*.jpg;*.png;*.tif;*.bmp','Select the Asset Image'); % select image 
 
 img = imread([pthname fname]);
 % figure
 % imshow(img); % Display Image
 
-[fis_fname, fis_pthname]=uigetfile('*.fis','Select the FIS'); %select image 
+[fis_fname, fis_pthname] = uigetfile('*.fis','Select the FIS'); % select image 
 % fis_fname = 'low_intensity.fis';
 fis = readfis([fis_pthname fis_fname]);
 
@@ -33,7 +33,8 @@ parfor i = 2:i_loop_var
     ppm.increment();
 end
 
-% Delete the progress handle when the parfor loop is done (otherwise the timer that keeps updating the progress might not stop).
+% Delete the progress handle when the parfor loop is done (otherwise the 
+% timer that keeps updating the progress might not stop).
 delete(ppm);
 delete(poolobj)
 toc
@@ -50,7 +51,8 @@ imhist(img_out)
 
 % linkaxes([ax1 ax2],'xy');
 
-out_fname = sprintf('data/Output/HDR/%s', fname);
+out_fname = sprintf('data/Output/HDR/out_0_400_2000_10000_%s', fname);
+% out_fname = sprintf('data/Output/HDR/out_%s', fname);
 % imwrite(img_out, out_fname); % Save output Image
 
 info = imfinfo([pthname fname]);
