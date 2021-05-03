@@ -12,13 +12,13 @@ def ensure_dir(file_path):
         print('Creading Directory: '+directory)
         os.makedirs(directory)
 
-Path = "196488311_scene_RH.tif";
+Path = "19648311_RH_0_0.tif";
 filename, file_extension = os.path.splitext(Path)
 image = cv2.imread(Path, cv2.IMREAD_ANYDEPTH)
 print(Path)
 
-tileSizeX = 1024;
-tileSizeY = 1024;
+tileSizeX = 32;
+tileSizeY = 32;
 numTilesX = math.ceil(image.shape[1]/tileSizeX)
 numTilesY = math.ceil(image.shape[0]/tileSizeY)
 

@@ -1,5 +1,6 @@
 % Precess an Image through a FIS
 [fname, pthname] = uigetfile('*.jpg;*.png;*.tif;*.bmp','Select the Asset Image'); % select image 
+fprintf('Opening file: %s\n', [pthname, fname])
 
 img = imread([pthname fname]);
 % figure
@@ -7,11 +8,13 @@ img = imread([pthname fname]);
 
 [fis_fname, fis_pthname] = uigetfile('*.fis','Select the FIS'); % select image 
 % fis_fname = 'low_intensity.fis';
+fprintf('Reading FIS: %s\n', [fis_pthname, fis_fname])
 fis = readfis([fis_pthname fis_fname]);
 
 [m, n] = size(img);
 img_pad = padarray(img,[1 1]);
-img_out = img;
+img_pad = gpuArray(img_pad);
+img_out = gpuArray(img);
 
 tic
 numCores = feature('numcores');
@@ -29,6 +32,7 @@ parfor i = 2:i_loop_var
     for j = 2:j_loop_var
         mat = getWindow(img_pad, i, j); % selecting your 3x3 window
         arr = reshape(mat, [1 numel(mat)]); %convert to 1-D array
+        arr = gather(arr);
         arr = cast(arr,'double');
         img_out(i,j) = evalfis(fis,arr); %replaced with corrections
     end
@@ -40,6 +44,8 @@ end
 delete(ppm);
 delete(poolobj)
 toc
+
+img_out = gather(img_out);
 
 figure
 imhist(img) % Display Image Histogram

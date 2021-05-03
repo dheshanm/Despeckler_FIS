@@ -106,10 +106,13 @@ if __name__ == '__main__':
 #     print(f'[*] Starting Metrics Computation')
     
     for idx in range(len(noisy_files)):
-        print(f'    [] Loading Noisy Image @ {noisy_files[idx]}')
-        img_n = np.asarray(Image.open(noisy_files[idx]))  # Noisy
-        print(f'    [] Loading Filtered Image @ {denoi_files[idx]}')
-        img_f = np.asarray(Image.open(denoi_files[idx]))  # Filtered
+        print(f'    [ {idx+1} / {len(noisy_files)} ] Loading Noisy Image @ {noisy_files[idx]}')
+        img_n = np.nan_to_num(np.asarray(Image.open(noisy_files[idx])), posinf=46000, neginf=0)  # Noisy
+        print(f'    [ {idx+1} / {len(noisy_files)} ] Loading Filtered Image @ {denoi_files[idx]}')
+        img_f = np.nan_to_num(np.asarray(Image.open(denoi_files[idx])), posinf=46000, neginf=0)  # Filtered
+        # print(f'    [] Clipping Images to range 0 to 46000')
+        # np.clip(img_n, 0, 46000, img_n)
+        # np.clip(img_f, 0, 46000, img_f)
         
     ###########################################################################
         print(f'      [*] Starting Metrics Computation')
@@ -117,12 +120,14 @@ if __name__ == '__main__':
         ssi_v = SSI(img_n, img_f)
         smpi_v = SMPI(img_n, img_f)
 #         enl_v = ENL_handler(denoi_files[idx])
-        ssim_v = SSIM(img_n, img_f)
         mean_in = MEAN_in(img_n)
         mean_out = MEAN_out(img_f)
+        # ssim_v = SSIM(img_n, img_f)
 
 #         df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'ENL': enl_v}, ignore_index = True) 
-        df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'SSIM': ssim_v, 'MEAN_in': mean_in, 'MEAN_out': mean_out}, ignore_index = True) 
+        # df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'SSIM': ssim_v, 'MEAN_in': mean_in, 'MEAN_out': mean_out}, ignore_index = True)
+        
+        df = df.append({'Name' : ntpath.basename(noisy_files[idx]), 'PSNR' : psnr_v, 'SSI' : ssi_v, 'SMPI': smpi_v, 'MEAN_in': mean_in, 'MEAN_out': mean_out}, ignore_index = True) 
     
     ###########################################################################
     
