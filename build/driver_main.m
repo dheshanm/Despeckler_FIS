@@ -10,11 +10,12 @@ fprintf('[%s] Reading FIS: %s\n', datetime('now'), [fis_pthname, fis_fname])
 % fis = readfis([fis_pthname fis_fname]);
 
 out_dir = uigetdir('', 'Select Output Directory');
+fprintf('[%s] Output Directory: %s\n', datetime('now'), out_dir)
 
-[exec_time, img_processed] = driver_c_v2(img, [fis_pthname, fis_fname]);
+[exec_time, img_processed] = driver_trim_mex_c(img, [fis_pthname, fis_fname]);
 fprintf('[%s] Process Completed in: %fs\n', datetime('now'), exec_time)
 
-out_fname = sprintf('%s\\sug_5_%s', out_dir, fname);
+out_fname = sprintf('%s\\out_%s', out_dir, fname);
 % out_fname = sprintf('data/Output/HDR/out_%s', fname);
 % imwrite(img_out, out_fname); % Save output Image
 
