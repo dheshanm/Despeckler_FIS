@@ -14,7 +14,7 @@ for idx = 1:num_of_files
     [exec_time, img_processed] = driver_c_v2(img, [fis_pthname, fis_fname]);
     fprintf('Process Completed in: %fs\n', exec_time)
     
-    out_fname = sprintf('D:/dev/SAR/matlab/Despeckler_FIS/data/Output/HDR/Suppression/out_v4_%s', img_fname_path);
+    out_fname = sprintf('D:/dev/SAR/matlab/Despeckler_FIS/data/Output/HDR/Sugeno/sug_5_%s', img_fname_path);
     info = imfinfo([pthname img_fname_path]);
     t = Tiff(out_fname, 'w');
     tagstruct.ImageLength = size(img_processed, 1);

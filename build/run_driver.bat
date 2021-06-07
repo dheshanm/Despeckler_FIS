@@ -1,0 +1,1 @@
+matlab -nosplash -nodesktop -r "cd('%cd%'); driver_main;"

@@ -1,0 +1,1 @@
+matlab -nosplash -nodesktop -r "cd('$PWD'); driver_main;"
