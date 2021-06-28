@@ -1,0 +1,1 @@
+matlab -nosplash -nodesktop -r "cd('%cd%'); driver_gui('D:\dev\SAR\matlab\data\full_size\input\HDR\output_19648211_HH\_0_0.tif', '%cd%\FIS\sugeno_5.fis', '%cd%\data\output\out_0_0.tif');"

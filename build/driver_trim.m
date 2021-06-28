@@ -1,4 +1,4 @@
-function [exec_time, img_processed] = driver(img, fis_path)
+function [exec_time, img_processed] = driver_trim(img, fis_path)
 %MAIN Precess an Image through a FIS
 %coder.extrinsic('evaluatefis_mex');
 
